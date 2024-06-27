@@ -1,20 +1,20 @@
-import { ICartProduct } from 'models';
+import { ICartProduct, IProduct } from 'models';
 import CartProduct from './CartProduct';
 
 import * as S from './style';
 
 interface IProps {
-  products: ICartProduct[];
+  products: ICartProduct[] ;
 }
 
 const CartProducts = ({ products }: IProps) => {
   return (
     <S.Container>
       {products?.length ? (
-        products.map((p) => <CartProduct product={p} key={p.sku} />)
+        products.map((p,index) => <CartProduct product={p} key={(p.sku + index) + (p.selectedSize || '1')} />)
       ) : (
         <S.CartProductsEmpty>
-          Add some products in the cart <br />
+          在购物车中添加一些产品 <br />
           :)
         </S.CartProductsEmpty>
       )}

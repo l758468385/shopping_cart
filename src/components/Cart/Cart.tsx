@@ -3,11 +3,10 @@ import CartProducts from './CartProducts';
 
 import * as S from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { ICartProduct } from '../../models';
+import { RootState } from 'store';
+import { ICartProduct } from 'models';
 
-
-import {openCart,closeCart} from '../../store/slices/cartSlice';
+import {openCart,clearCart,closeCart} from 'store/slices/cartSlice';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -47,17 +46,18 @@ const Cart = () => {
   };
 
 
-  console.log('total',total);
   const handleCheckout = () => {
     if (total.productQuantity) {
       alert(
-        `Checkout - Subtotal: ${total.currencyFormat} ${formatPrice(
+        `总计: ${total.currencyFormat} ${formatPrice(
           total.totalPrice,
           total.currencyId
         )}`
       );
+      dispatch(closeCart())
+      dispatch(clearCart())
     } else {
-      alert('Add some product in the cart!');
+      alert('在购物车中添加一些产品!');
     }
   };
 
@@ -75,7 +75,7 @@ const Cart = () => {
           <span>X</span>
         ) : (
           <S.CartIcon>
-            <S.CartQuantity title="Products in cart quantity">
+            <S.CartQuantity title="购物车中的产品数量">
               {total.productQuantity}
             </S.CartQuantity>
           </S.CartIcon>
@@ -88,13 +88,13 @@ const Cart = () => {
             <S.CartIcon large>
               <S.CartQuantity>{total.productQuantity}</S.CartQuantity>
             </S.CartIcon>
-            <S.HeaderTitle>Cart</S.HeaderTitle>
+            <S.HeaderTitle>购物车</S.HeaderTitle>
           </S.CartContentHeader>
 
           <CartProducts products={products} />
 
           <S.CartFooter>
-            <S.Sub>SUBTOTAL</S.Sub>
+            <S.Sub>总计</S.Sub>
             <S.SubPrice>
               <S.SubPriceValue>{`${total.currencyFormat} ${formatPrice(
                 total.totalPrice,
@@ -103,7 +103,7 @@ const Cart = () => {
               <S.SubPriceInstallment>
                 {total.installments ? (
                   <span>
-                    {`OR UP TO ${total.installments} x ${
+                    {`或最多 ${total.installments} x ${
                       total.currencyFormat
                     } ${formatPrice(
                       total.totalPrice / total.installments,
@@ -114,7 +114,7 @@ const Cart = () => {
               </S.SubPriceInstallment>
             </S.SubPrice>
             <S.CheckoutButton onClick={handleCheckout} autoFocus>
-              Checkout
+              去付款
             </S.CheckoutButton>
           </S.CartFooter>
         </S.CartContent>

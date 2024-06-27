@@ -16,7 +16,7 @@ export const CartButton = styled.button`
   z-index: 2;
 
   &:focus-visible {
-    outline: 3px solid ${({ theme }) => theme.colors.secondary};
+    outline: 3px solid ${({ theme }) => theme.colors.primary};
   }
 
   &:hover {
@@ -33,16 +33,16 @@ export const Container = styled.div<IContainer>`
   right: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary};;
   box-sizing: border-box;
   z-index: 99;
-
+  color: #333;
   transition: right 0.2s;
 
   ${CartButton} {
     left: ${({ isOpen }) => (isOpen ? '0' : '-50px')};
     background-color: ${({ theme, isOpen }) =>
-      isOpen ? theme.colors.black : theme.colors.primary};
+      isOpen ? theme.colors.black : theme.colors.secondary};
   }
 
   @media only screen and (min-width: ${({ theme: { breakpoints } }) =>
@@ -110,7 +110,7 @@ export const CartContent = styled.div`
 `;
 
 export const CartContentHeader = styled.div`
-  color: #ececec;
+  color: #333;
   box-sizing: border-box;
   text-align: center;
   padding: 45px 0;
@@ -120,11 +120,12 @@ export const HeaderTitle = styled.span`
   font-weight: bold;
   font-size: 1.2em;
   vertical-align: middle;
+  color: #ffffff;
 `;
 
 export const Sub = styled.p`
   width: 20%;
-  color: #5b5a5e;
+  color: #fff;
   vertical-align: middle;
   display: inline-block;
 `;
@@ -141,16 +142,18 @@ export const SubPriceValue = styled.p`
   color: ${({ theme }) => theme.colors.secondary};
   font-size: 22px;
   margin: 0;
+  font-weight: bold;
 `;
 
 export const SubPriceInstallment = styled.p`
   margin: 0;
+  color: rgba(255, 255, 255, 0.89);
 `;
 
 export const CheckoutButton = styled.button`
   width: 100%;
   border: 0;
-  color: #ececec;
+  color: #ffffff;
   text-transform: uppercase;
   background-color: #0c0b10;
   text-align: center;
@@ -158,6 +161,7 @@ export const CheckoutButton = styled.button`
   margin-top: 40px;
   cursor: pointer;
   outline: none;
+  font-weight: bold;
 
   transition: background-color 0.2s;
 
@@ -178,7 +182,7 @@ export const CartFooter = styled.div`
   width: 100%;
   height: 200px;
   z-index: 2;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary};;
 
   &::before {
     content: '';

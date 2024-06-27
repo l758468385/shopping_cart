@@ -6,6 +6,7 @@ export const Container = styled.div`
   padding: 5%;
 
   transition: background-color 0.2s, opacity 0.2s;
+  border-bottom: 1px solid rgba(221, 221, 223, 0.41);
 
   &::before {
     content: '';
@@ -15,22 +16,23 @@ export const Container = styled.div`
     position: absolute;
     top: 0;
     left: 5%;
+
   }
 `;
 
 export const Details = styled.div`
   width: 57%;
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: middle; color: #ffffff;
 `;
 
 export const Title = styled.p`
-  color: #ececec;
+  color: #ffffff;
   margin: 0;
 `;
 
 export const Desc = styled.p`
-  color: #5b5a5e;
+  color: #ece8e8;
   margin: 0;
 `;
 
@@ -40,6 +42,7 @@ export const Price = styled.div`
   color: ${({ theme }) => theme.colors.secondary};
   text-align: right;
   width: 25%;
+  font-weight: bold;
 `;
 
 export const DeleteButton = styled.button`
@@ -51,6 +54,7 @@ export const DeleteButton = styled.button`
   position: absolute;
   background-size: auto 100%;
   background-image: url(${require('static/delete-icon.png')});
+  background-position-x: -17px;
   background-repeat: no-repeat;
   z-index: 2;
   cursor: pointer;
@@ -70,9 +74,9 @@ export const ChangeQuantity = styled.button`
   color: #b7b7b7;
   border: 0;
   background-color: #000;
-  width: 25px;
-  height: 25px;
-
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
   &:focus-visible {
     outline: 3px solid ${({ theme }) => theme.colors.secondary};
   }

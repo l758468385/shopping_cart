@@ -1,4 +1,4 @@
-export interface IProduct {
+export interface IBaseProduct {
   id: number;
   sku: number;
   title: string;
@@ -12,8 +12,11 @@ export interface IProduct {
   isFreeShipping: boolean;
 }
 
-export interface ICartProduct extends IProduct {
+export interface IProduct extends IBaseProduct {}
+
+export interface ICartProduct extends IBaseProduct {
   quantity: number;
+  selectedSize?: string;
 }
 
 export interface ICartTotal {

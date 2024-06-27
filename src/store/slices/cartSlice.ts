@@ -13,7 +13,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const item = state.items.find(item => item.id === action.payload.id);
+      const { id, selectedSize } = action.payload;
+      const item = state.items.find(item => item.id === id && item.selectedSize === selectedSize);
       if (item) {
         item.quantity += 1;
       } else {
@@ -21,24 +22,26 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      const index = state.items.findIndex(item => item.id === action.payload.id);
+      const { id, selectedSize } = action.payload;
+      const index = state.items.findIndex(item => item.id === id && item.selectedSize === selectedSize);
       if (index !== -1) {
         state.items.splice(index, 1);
       }
     },
     incrementQuantity: (state, action) => {
-      const item = state.items.find(item => item.id === action.payload.id);
+      const { id, selectedSize } = action.payload;
+      const item = state.items.find(item => item.id === id && item.selectedSize === selectedSize);
       if (item) {
         item.quantity += 1;
       }
     },
     decrementQuantity: (state, action) => {
-      const item = state.items.find(item => item.id === action.payload.id);
+      const { id, selectedSize } = action.payload;
+      const item = state.items.find(item => item.id === id && item.selectedSize === selectedSize);
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       } else if (item && item.quantity === 1) {
-        // 如果数量为1，减少数量时将其移出购物车
-        const index = state.items.findIndex(item => item.id === action.payload.id);
+        const index = state.items.findIndex(item => item.id === id && item.selectedSize === selectedSize);
         if (index !== -1) {
           state.items.splice(index, 1);
         }
