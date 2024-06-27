@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from 'store/slices/productsSlice';
 
 import * as S from './style';
-import { addToCart } from '../../store/slices/cartSlice';
 import { RootState } from '../../store';
 
 function App() {
@@ -28,10 +27,6 @@ function App() {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
-  const handleAddToCart = (product: any) => {
-    dispatch(addToCart(product));
-  };
 
   return (
     <S.Container>

@@ -1,38 +1,21 @@
 import { KeyboardEvent } from 'react';
 
-import {addToCart} from '../../../store/slices/cartSlice';
-import {openCart} from '../../../store/slices/cartSlice';
+import { addToCart } from 'store/slices/cartSlice';
+import { openCart } from 'store/slices/cartSlice';
 import formatPrice from 'utils/formatPrice';
 import { IProduct } from 'models';
 
 
 import * as S from './style';
+import { useDispatch } from 'react-redux';
 
 interface IProps {
   product: IProduct;
 }
 
 const Product = ({ product }: IProps) => {
-  // const { openCart, addProduct } = useCart();
+  const dispatch = useDispatch();
 
-
-
-  const addProduct = (p: {
-    quantity: number;
-    installments: number;
-    price: number;
-    description: string;
-    isFreeShipping: boolean;
-    style: string;
-    id: number;
-    sku: number;
-    title: string;
-    availableSizes: string[];
-    currencyId: string;
-    currencyFormat: string
-  }) =>{
-    addToCart(p)
-  }
   const {
     sku,
     title,
@@ -40,7 +23,7 @@ const Product = ({ product }: IProps) => {
     installments,
     currencyId,
     currencyFormat,
-    isFreeShipping,
+    isFreeShipping
   } = product;
 
   const formattedPrice = formatPrice(price, currencyId);
@@ -59,17 +42,13 @@ const Product = ({ product }: IProps) => {
       </S.Installment>
     );
   }
-
   const handleAddProduct = () => {
-    addProduct({ ...product, quantity: 1 });
-    openCart();
+    dispatch(addToCart({ ...product, quantity: 1 }));
+    dispatch(openCart());
   };
 
   const handleAddProductWhenEnter = (event: KeyboardEvent) => {
-    if (event.key === 'Enter' || event.code === 'Space') {
-      addProduct({ ...product, quantity: 1 });
-      openCart();
-    }
+    if (event.key === 'Enter' || event.code === 'Space') handleAddProduct();
   };
 
   return (

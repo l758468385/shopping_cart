@@ -1,16 +1,17 @@
 import formatPrice from 'utils/formatPrice';
 import { ICartProduct } from 'models';
 
-import { useCart } from 'contexts/cart-context';
-
+import {removeFromCart,incrementQuantity,decrementQuantity} from '../../../../store/slices/cartSlice';
 import * as S from './style';
+import { useDispatch } from 'react-redux';
 
 interface IProps {
   product: ICartProduct;
 }
 const CartProduct = ({ product }: IProps) => {
-  const { removeProduct, increaseProductQuantity, decreaseProductQuantity } =
-    useCart();
+
+ const dispatch =  useDispatch()
+
   const {
     sku,
     title,
@@ -22,9 +23,9 @@ const CartProduct = ({ product }: IProps) => {
     quantity,
   } = product;
 
-  const handleRemoveProduct = () => removeProduct(product);
-  const handleIncreaseProductQuantity = () => increaseProductQuantity(product);
-  const handleDecreaseProductQuantity = () => decreaseProductQuantity(product);
+  const handleRemoveProduct = () => dispatch(removeFromCart(product));
+  const handleIncreaseProductQuantity = () => dispatch(incrementQuantity(product));
+  const handleDecreaseProductQuantity = () => dispatch(decrementQuantity(product));
 
   return (
     <S.Container>
@@ -48,7 +49,7 @@ const CartProduct = ({ product }: IProps) => {
         <div>
           <S.ChangeQuantity
             onClick={handleDecreaseProductQuantity}
-            disabled={quantity === 1 ? true : false}
+            // disabled={quantity === 1 ? true : false}
           >
             -
           </S.ChangeQuantity>
