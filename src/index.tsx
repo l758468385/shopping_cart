@@ -1,26 +1,32 @@
 import { StrictMode } from 'react';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store'; // 导入你的 Redux store
-import ReactDOM from 'react-dom';
+// @ts-ignore
+import * as ReactDOMClient from 'react-dom/client';
+
+/* Theme */
 import { ThemeProvider } from 'commons/style/styled-components';
 import { theme } from 'commons/style/theme';
 import GlobalStyle from 'commons/style/global-style';
+
+/* Context Providers */
+import { ProductsProvider } from 'contexts/products-context';
+import { CartProvider } from 'contexts/cart-context';
+
+import { Provider } from 'react-redux';
+import store from './store';
+
+
 import App from 'components/App';
 
 const root = document.getElementById('root')!;
+const container = ReactDOMClient.createRoot(root);
 
-ReactDOM.render(
+container.render(
   <StrictMode>
-    <Provider store={store}>
-      {/* 使用 PersistGate 包裹整个应用 */}
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <App />
-        </ThemeProvider>
-      </PersistGate>
-    </Provider>
-  </StrictMode>,
-  root
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    </ThemeProvider>
+  </StrictMode>
 );

@@ -1,36 +1,32 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// @ts-ignore
-import { applySizeFilter } from '../../productActions';
-// @ts-ignore
-import { ProductState } from '../../productReducer';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSizesFilter } from 'store/slices/productsSlice';
 import * as S from './style';
+import { RootState } from '../../store';
 
 export const availableSizes = ['XS', 'S', 'M', 'ML', 'L', 'XL', 'XXL'];
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const filters = useSelector((state: ProductState) => {
-    console.log('state',state);
-    return state.filters
-  });
-  console.log('filters', filters);
-  const selectedCheckboxes = new Set(filters);
+  const filterSizes = useSelector((state:RootState) => state.products.filterSizes);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set<string>(filterSizes));
 
   const toggleCheckbox = (label: string) => {
-    if (selectedCheckboxes.has(label)) {
-      selectedCheckboxes.delete(label);
+    const updatedCheckboxes = new Set(selectedCheckboxes);
+    if (updatedCheckboxes.has(label)) {
+      updatedCheckboxes.delete(label);
     } else {
-      selectedCheckboxes.add(label);
+      updatedCheckboxes.add(label);
     }
+    setSelectedCheckboxes(updatedCheckboxes);
 
-    const filters = Array.from(selectedCheckboxes) as string[];
-
-    dispatch(applySizeFilter(filters));
+    // 将 Set 转换为数组，更新筛选器
+    const updatedFilters = Array.from(updatedCheckboxes);
+    dispatch(setSizesFilter(updatedFilters));
   };
 
   const createCheckbox = (label: string) => (
-    <S.Checkbox label={label} handleOnChange={() => toggleCheckbox(label)} key={label} />
+    <S.Checkbox label={label} handleOnChange={toggleCheckbox} key={label} />
   );
 
   const createCheckboxes = () => availableSizes.map(createCheckbox);

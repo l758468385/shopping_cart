@@ -1,17 +1,38 @@
-import { FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { IProduct } from 'models';
-import { addToCart, openCart } from '../../../cartActions';
+import { KeyboardEvent } from 'react';
 
+import {addToCart} from '../../../store/slices/cartSlice';
+import {openCart} from '../../../store/slices/cartSlice';
 import formatPrice from 'utils/formatPrice';
+import { IProduct } from 'models';
+
+
 import * as S from './style';
 
 interface IProps {
   product: IProduct;
 }
 
-const Product: FC<IProps> = ({ product }) => {
-  const dispatch = useDispatch();
+const Product = ({ product }: IProps) => {
+  // const { openCart, addProduct } = useCart();
+
+
+
+  const addProduct = (p: {
+    quantity: number;
+    installments: number;
+    price: number;
+    description: string;
+    isFreeShipping: boolean;
+    style: string;
+    id: number;
+    sku: number;
+    title: string;
+    availableSizes: string[];
+    currencyId: string;
+    currencyFormat: string
+  }) =>{
+    addToCart(p)
+  }
   const {
     sku,
     title,
@@ -40,20 +61,19 @@ const Product: FC<IProps> = ({ product }) => {
   }
 
   const handleAddProduct = () => {
-    dispatch(addToCart({ ...product, quantity: 1 }));
-    dispatch(openCart());
+    addProduct({ ...product, quantity: 1 });
+    openCart();
   };
 
   const handleAddProductWhenEnter = (event: KeyboardEvent) => {
     if (event.key === 'Enter' || event.code === 'Space') {
-      dispatch(addToCart({ ...product, quantity: 1 }));
-      dispatch(openCart());
+      addProduct({ ...product, quantity: 1 });
+      openCart();
     }
   };
 
-  // @ts-ignore
   return (
-    <S.Container  sku={sku} tabIndex={1}>
+    <S.Container onKeyUp={handleAddProductWhenEnter} sku={sku} tabIndex={1}>
       {isFreeShipping && <S.Stopper>Free shipping</S.Stopper>}
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>

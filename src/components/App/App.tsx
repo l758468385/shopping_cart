@@ -1,26 +1,41 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
 import Loader from 'components/Loader';
 import Filter from 'components/Filter';
 import Products from 'components/Products';
 import Cart from 'components/Cart';
-import { fetchProducts } from '../../productActions';
-import { RootState } from '../../store'; // 导入根状态类型
+
+
+
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProducts } from 'store/slices/productsSlice';
 
 import * as S from './style';
+import { addToCart } from '../../store/slices/cartSlice';
+import { RootState } from '../../store';
 
 function App() {
-  const dispatch = useDispatch();
-  const { isFetching, products } = useSelector((state: RootState) => state.products);
 
+  const dispatch = useDispatch();
+  const products = useSelector((state: RootState) => {
+    const { items, filterSizes } = state.products;
+    if (filterSizes.length === 0) {
+      return items;
+    }
+    return items.filter((product: { availableSizes: any[]; }) => product.availableSizes.some(size => filterSizes.includes(size)));
+  });
+  const productStatus = useSelector((state:RootState) => state.products.status);
   useEffect(() => {
-    // @ts-ignore
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  const handleAddToCart = (product: any) => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <S.Container>
-      {isFetching && <Loader />}
+      {productStatus === 'loading' && <Loader />}
       <S.TwoColumnGrid>
         <S.Side>
           <Filter />
@@ -32,7 +47,7 @@ function App() {
           <Products products={products} />
         </S.Main>
       </S.TwoColumnGrid>
-      {/*<Cart />*/}
+      <Cart />
     </S.Container>
   );
 }
