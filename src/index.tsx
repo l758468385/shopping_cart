@@ -6,10 +6,10 @@ import  ReactDOMClient from 'react-dom/client';
 import { ThemeProvider } from 'commons/style/styled-components';
 import { theme } from 'commons/style/theme';
 import GlobalStyle from 'commons/style/global-style';
+
 import { Provider } from 'react-redux';
-import store from './store';
-
-
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './store';
 import App from 'components/App';
 
 const root = document.getElementById('root')!;
@@ -20,7 +20,9 @@ container.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>,
     </ThemeProvider>
   </StrictMode>
