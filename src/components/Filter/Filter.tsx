@@ -1,12 +1,20 @@
-import { useProducts } from 'contexts/products-context';
-
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// @ts-ignore
+import { applySizeFilter } from '../../productActions';
+// @ts-ignore
+import { ProductState } from '../../productReducer';
 import * as S from './style';
 
 export const availableSizes = ['XS', 'S', 'M', 'ML', 'L', 'XL', 'XXL'];
 
 const Filter = () => {
-  const { filters, filterProducts } = useProducts();
-
+  const dispatch = useDispatch();
+  const filters = useSelector((state: ProductState) => {
+    console.log('state',state);
+    return state.filters
+  });
+  console.log('filters', filters);
   const selectedCheckboxes = new Set(filters);
 
   const toggleCheckbox = (label: string) => {
@@ -16,13 +24,13 @@ const Filter = () => {
       selectedCheckboxes.add(label);
     }
 
-    const filters = Array.from(selectedCheckboxes) as [];
+    const filters = Array.from(selectedCheckboxes) as string[];
 
-    filterProducts(filters);
+    dispatch(applySizeFilter(filters));
   };
 
   const createCheckbox = (label: string) => (
-    <S.Checkbox label={label} handleOnChange={toggleCheckbox} key={label} />
+    <S.Checkbox label={label} handleOnChange={() => toggleCheckbox(label)} key={label} />
   );
 
   const createCheckboxes = () => availableSizes.map(createCheckbox);

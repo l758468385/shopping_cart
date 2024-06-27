@@ -1,18 +1,17 @@
-import { KeyboardEvent } from 'react';
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { IProduct } from 'models';
+import { addToCart, openCart } from '../../../cartActions';
 
 import formatPrice from 'utils/formatPrice';
-import { IProduct } from 'models';
-
-import { useCart } from 'contexts/cart-context';
-
 import * as S from './style';
 
 interface IProps {
   product: IProduct;
 }
 
-const Product = ({ product }: IProps) => {
-  const { openCart, addProduct } = useCart();
+const Product: FC<IProps> = ({ product }) => {
+  const dispatch = useDispatch();
   const {
     sku,
     title,
@@ -41,19 +40,20 @@ const Product = ({ product }: IProps) => {
   }
 
   const handleAddProduct = () => {
-    addProduct({ ...product, quantity: 1 });
-    openCart();
+    dispatch(addToCart({ ...product, quantity: 1 }));
+    dispatch(openCart());
   };
 
   const handleAddProductWhenEnter = (event: KeyboardEvent) => {
     if (event.key === 'Enter' || event.code === 'Space') {
-      addProduct({ ...product, quantity: 1 });
-      openCart();
+      dispatch(addToCart({ ...product, quantity: 1 }));
+      dispatch(openCart());
     }
   };
 
+  // @ts-ignore
   return (
-    <S.Container onKeyUp={handleAddProductWhenEnter} sku={sku} tabIndex={1}>
+    <S.Container  sku={sku} tabIndex={1}>
       {isFreeShipping && <S.Stopper>Free shipping</S.Stopper>}
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>

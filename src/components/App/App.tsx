@@ -1,32 +1,29 @@
 import { useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'components/Loader';
-import { GithubCorner, GithubStarButton } from 'components/Github';
-import Recruiter from 'components/Recruiter';
 import Filter from 'components/Filter';
 import Products from 'components/Products';
 import Cart from 'components/Cart';
-
-import { useProducts } from 'contexts/products-context';
+import { fetchProducts } from '../../productActions';
+import { RootState } from '../../store'; // 导入根状态类型
 
 import * as S from './style';
 
 function App() {
-  const { isFetching, products, fetchProducts } = useProducts();
+  const dispatch = useDispatch();
+  const { isFetching, products } = useSelector((state: RootState) => state.products);
 
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    // @ts-ignore
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <S.Container>
       {isFetching && <Loader />}
-      <GithubCorner />
-      <Recruiter />
       <S.TwoColumnGrid>
         <S.Side>
           <Filter />
-          <GithubStarButton />
         </S.Side>
         <S.Main>
           <S.MainHeader>
@@ -35,7 +32,7 @@ function App() {
           <Products products={products} />
         </S.Main>
       </S.TwoColumnGrid>
-      <Cart />
+      {/*<Cart />*/}
     </S.Container>
   );
 }
