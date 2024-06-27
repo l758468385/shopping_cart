@@ -41,8 +41,8 @@ export const Container = styled.div<IContainer>`
     width: 100%;
     height: 270px;
     position: relative;
-    background-image: ${({ sku }) =>
-      `url(${require(`static/products/${sku}-1-product.webp`)})`};
+    /*background-image: ${({ sku }) =>
+      `url(${require(`static/products/${sku}-1-product.webp`)})`};*/
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -65,8 +65,8 @@ export const Container = styled.div<IContainer>`
 
   &:hover {
     ${Image} {
-      background-image: ${({ sku }) =>
-        `url(${require(`static/products/${sku}-2-product.webp`)})`};
+      /*background-image: ${({ sku }) =>
+        `url(${require(`static/products/${sku}-2-product.webp`)})`};*/
     }
 
     ${BuyButton} {
