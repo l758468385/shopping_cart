@@ -117,7 +117,8 @@
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
       "^components/(.*)$": "<rootDir>/src/components/$1",
-      "^commons/(.*)$": "<rootDir>/src/commons/$1"
+      "^commons/(.*)$": "<rootDir>/src/commons/$1",
+      "^store/(.*)$": "<rootDir>/src/store/$1"
     },
     "moduleFileExtensions": [
       "web.js",
