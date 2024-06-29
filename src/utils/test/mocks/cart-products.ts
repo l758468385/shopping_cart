@@ -14,6 +14,7 @@ const mockProducts: ICartProduct[] = [
     style: 'White T-shirt',
     title: 'Cropped Stay Groovy off white',
     quantity: 1,
+    coverImage:'https://i.ibb.co/cDNmRj/image-1.png',
   },
   {
     availableSizes: ['X', 'ML', 'L'],
@@ -28,6 +29,7 @@ const mockProducts: ICartProduct[] = [
     style: 'Wine',
     title: 'Basic Cactus White T-shirt',
     quantity: 1,
+    coverImage:'https://i.ibb.co/cDNmRj/image-1.png',
   },
   {
     availableSizes: ['XL'],
@@ -42,6 +44,7 @@ const mockProducts: ICartProduct[] = [
     style: 'Tony Hawk',
     title: 'Skater Black Sweatshirt',
     quantity: 1,
+    coverImage:'https://i.ibb.co/cDNmRj/image-1.png',
   },
 ];
 

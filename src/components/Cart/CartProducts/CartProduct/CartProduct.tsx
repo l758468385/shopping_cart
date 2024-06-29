@@ -18,7 +18,8 @@ const CartProduct = ({ product }: IProps) => {
     currencyId,
     currencyFormat,
     quantity,
-    selectedSize
+    selectedSize,
+    coverImage
   } = product;
 
   const handleRemoveProduct = () => dispatch(removeFromCart(product));
@@ -31,10 +32,10 @@ const CartProduct = ({ product }: IProps) => {
         onClick={handleRemoveProduct}
         title="从购物车中删除产品"
       />
-      {/*<S.Image*/}
-      {/*  src={require(`static/products/${sku}-1-cart.webp`)}*/}
-      {/*  alt={title}*/}
-      {/*/>*/}
+       <S.Image
+        src={coverImage}
+        alt={title}
+      />
       <S.Details>
         <S.Title>{title}</S.Title>
         <S.Desc>

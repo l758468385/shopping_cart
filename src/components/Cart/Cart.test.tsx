@@ -30,7 +30,8 @@ const mockProducts: ICartProduct[] = [
     currencyFormat: '$',
     isFreeShipping: true,
     quantity: 2,
-    selectedSize: 'M'
+    selectedSize: 'M',
+    coverImage: 'https://i.ibb.co/cDNmRj/image-1.png'
   }
 ];
 

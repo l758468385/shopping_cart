@@ -26,7 +26,8 @@ const mockProducts: IProduct[] = [
     installments: 4,
     currencyId: 'USD',
     currencyFormat: '$',
-    isFreeShipping: true
+    isFreeShipping: true,
+    coverImage: 'https://i.ibb.co/cDNmRj/image-1.png',
   },
   {
     id: 2,
@@ -39,8 +40,9 @@ const mockProducts: IProduct[] = [
     installments: 4,
     currencyId: 'USD',
     currencyFormat: '$',
-    isFreeShipping: false
-  }
+    isFreeShipping: false,
+    coverImage: 'https://i.ibb.co/cDNmRj/image-1.png',
+  },
 ];
 
 describe('Products Component', () => {
@@ -55,21 +57,25 @@ describe('Products Component', () => {
   });
 
   it('renders the correct number of products', () => {
-    render(<ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <Products products={mockProducts}></Products>
-      </Provider>
-    </ThemeProvider>);
+    render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Products products={mockProducts}></Products>
+        </Provider>
+      </ThemeProvider>
+    );
     const productElements = screen.getAllByTestId('product');
     expect(productElements).toHaveLength(mockProducts.length);
   });
 
   it('renders the correct product titles', () => {
-    render(<ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <Products products={mockProducts}></Products>
-      </Provider>
-    </ThemeProvider>);
+    render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Products products={mockProducts}></Products>
+        </Provider>
+      </ThemeProvider>
+    );
     mockProducts.forEach((product) => {
       expect(screen.getByText(product.title)).toBeInTheDocument();
     });

@@ -27,7 +27,8 @@ const mockProduct: ICartProduct = {
   currencyFormat: '$',
   isFreeShipping: true,
   quantity: 2,
-  selectedSize: 'XL'
+  selectedSize: 'XL',
+  coverImage: 'https://i.ibb.co/cDNmRj/image-1.png'
 };
 
 describe('CartProduct Component', () => {

@@ -15,15 +15,15 @@ const Product: FC<IProductProps>  = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const {
-    sku,
     title,
     price,
     installments,
     currencyId,
     currencyFormat,
     isFreeShipping,
+    coverImage
   } = product
-
+  console.log('coverImage',coverImage)
   const formattedPrice = formatPrice(price, currencyId);
   let productInstallment;
 
@@ -54,11 +54,11 @@ const Product: FC<IProductProps>  = ({ product }) => {
   };
 
   return (
-    <S.Container onKeyUp={handleAddProductWhenEnter} sku={sku} tabIndex={1}>
+    <S.Container onKeyUp={handleAddProductWhenEnter} coverImage={coverImage}   tabIndex={1}>
       {isFreeShipping && <S.Stopper>包邮</S.Stopper>}
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: '10px',marginTop:'20px' }}>
         <select
           data-testid='size'
           id="size"
@@ -70,6 +70,7 @@ const Product: FC<IProductProps>  = ({ product }) => {
             borderRadius: '5px',
             border: '1px solid #ccc',
             minWidth: '150px',
+            cursor:'pointer'
           }}
         >
           <option value="" disabled>请选择尺寸</option>

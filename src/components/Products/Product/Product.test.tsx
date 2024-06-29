@@ -21,21 +21,26 @@ const mockProduct: IProduct = {
   installments: 4,
   currencyId: 'USD',
   currencyFormat: '$',
-  isFreeShipping: true
+  isFreeShipping: true,
+  coverImage: 'https://i.ibb.co/cDNmRj/image-1.png',
 };
 
 jest.mock('../../../commons/Message/Message', () => ({
   warning: jest.fn(),
 }));
 
-jest.mock('utils/formatPrice', () => (price: number, currencyId: string) => `${currencyId}${price.toFixed(2)}`);
+jest.mock(
+  'utils/formatPrice',
+  () => (price: number, currencyId: string) =>
+    `${currencyId}${price.toFixed(2)}`
+);
 let store: MockStoreEnhanced<unknown, {}>;
 describe('Product component', () => {
   beforeEach(() => {
     store = mockStore({
       cart: {
         items: [],
-        isOpen:false
+        isOpen: false,
       },
     });
   });
@@ -54,7 +59,6 @@ describe('Product component', () => {
   });
 
   it('handles size selection and add to cart', () => {
-
     render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -63,10 +67,9 @@ describe('Product component', () => {
       </ThemeProvider>
     );
 
-    const sizeSelect :any = screen.getByTestId('size');
+    const sizeSelect: any = screen.getByTestId('size');
     fireEvent.change(sizeSelect, { target: { value: 'M' } });
     expect(sizeSelect.value).toBe('M');
-
 
     const addButton = screen.getByText('添加购物车');
     fireEvent.click(addButton);
@@ -75,11 +78,11 @@ describe('Product component', () => {
     expect(actions).toEqual([
       {
         type: 'cart/addToCart',
-        payload: { ...mockProduct, selectedSize: 'M', quantity: 1 }
+        payload: { ...mockProduct, selectedSize: 'M', quantity: 1 },
       },
       {
-        type: 'cart/openCart'
-      }
+        type: 'cart/openCart',
+      },
     ]);
   });
 
@@ -98,5 +101,4 @@ describe('Product component', () => {
 
     expect($message.warning).toHaveBeenCalledWith('请选择尺寸！');
   });
-
 });

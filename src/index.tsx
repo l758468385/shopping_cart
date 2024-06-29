@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import  ReactDOMClient from 'react-dom/client';
 
 /* Theme */
@@ -15,8 +14,7 @@ const root = document.getElementById('root')!;
 const container = ReactDOMClient.createRoot(root);
 
 container.render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -24,5 +22,4 @@ container.render(
         </PersistGate>
       </Provider>,
     </ThemeProvider>
-  </StrictMode>
 );

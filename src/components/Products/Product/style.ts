@@ -22,7 +22,7 @@ interface IImage {
 export const Image = styled.div<IImage>``;
 
 interface IContainer {
-  sku: number | string;
+  coverImage: number | string;
 }
 export const Container = styled.div<IContainer>`
   position: relative;
@@ -41,8 +41,8 @@ export const Container = styled.div<IContainer>`
     width: 100%;
     height: 270px;
     position: relative;
-    /*background-image: ${({ sku }) =>
-      `url(${require(`static/products/${sku}-1-product.webp`)})`};*/
+    background-image: ${({ coverImage }) =>
+      `url(${coverImage})`};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -64,10 +64,6 @@ export const Container = styled.div<IContainer>`
   }
 
   &:hover {
-    ${Image} {
-      /*background-image: ${({ sku }) =>
-        `url(${require(`static/products/${sku}-2-product.webp`)})`};*/
-    }
 
     ${BuyButton} {
       background-color: ${({ theme }) => theme.colors.secondary};
@@ -90,7 +86,7 @@ export const Stopper = styled.div`
 export const Title = styled.p`
   position: relative;
   padding: 0 20px;
-  height: 45px;
+  min-height: 45px;
 
   &::before {
     content: '';
@@ -98,7 +94,7 @@ export const Title = styled.p`
     height: 2px;
     background-color: ${({ theme }) => theme.colors.secondary};
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     left: 50%;
     margin-left: -10px;
   }

@@ -30,7 +30,8 @@ const mockProduct: IProduct = {
   installments: 4,
   currencyId: 'USD',
   currencyFormat: '$',
-  isFreeShipping: true
+  isFreeShipping: true,
+  coverImage: 'https://i.ibb.co/cDNmRj/image-1.png'
 };
 const initialState: RootState = {
   products: {

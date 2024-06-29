@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import store from '../../../store';
 
-
 const mockProducts: ICartProduct[] = [
   {
     id: 1,
@@ -22,8 +21,9 @@ const mockProducts: ICartProduct[] = [
     currencyFormat: '$',
     isFreeShipping: true,
     quantity: 2,
-    selectedSize: 'M'
-  }
+    selectedSize: 'M',
+    coverImage: 'https://i.ibb.co/cDNmRj/image-1.png'
+  },
 ];
 
 // 模拟空购物车的情况
@@ -33,9 +33,11 @@ describe('CartProducts with no products', () => {
     render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <CartProducts products={emptyProducts} />);
+          <CartProducts products={emptyProducts} />
+          );
         </Provider>
-      </ThemeProvider>);
+      </ThemeProvider>
+    );
 
     expect(screen.getByText(/在购物车中添加一些产品/i)).toBeInTheDocument();
   });
@@ -47,12 +49,13 @@ describe('CartProducts with products', () => {
     render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <CartProducts products={mockProducts} />);
+          <CartProducts products={mockProducts} />
+          );
         </Provider>
       </ThemeProvider>
     );
     // 确认每个产品都被渲染了
-    mockProducts.forEach(product => {
+    mockProducts.forEach((product) => {
       expect(screen.getByText(product.title)).toBeInTheDocument();
     });
   });

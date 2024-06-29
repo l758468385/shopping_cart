@@ -10,6 +10,7 @@ export interface IBaseProduct {
   currencyId: string;
   currencyFormat: string;
   isFreeShipping: boolean;
+  coverImage:string
 }
 
 export interface IProduct extends IBaseProduct {}

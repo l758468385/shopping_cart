@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
+import { getProducts } from '../../services/products';
 // 定义异步 thunk
 export const fetchProducts: any = createAsyncThunk(
   'products/fetchProducts',
   async () => {
-    const response = await axios.get('https://react-shopping-cart-67954.firebaseio.com/products.json');
-    return response.data.products;
+    const response = await getProducts();
+    return response;
   }
 );
 
@@ -22,6 +21,7 @@ export interface IProduct {
   currencyId: string;
   currencyFormat: string;
   isFreeShipping: boolean;
+  coverImage:string,
 }
 
 export interface ProductsState {
