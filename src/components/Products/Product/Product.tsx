@@ -3,10 +3,13 @@ import { useDispatch } from 'react-redux';
 import { addToCart, openCart } from 'store/slices/cartSlice';
 import formatPrice from 'utils/formatPrice';
 import * as S from './style';
-import { IProduct, ICartProduct } from 'models';
+import { IProduct } from 'models';
+import $message from '../../../commons/Message/Message';
+
 interface IProductProps {
-  product: IProduct; // 定义 props 的类型为 IProduct
+  product: IProduct;
 }
+
 const Product: FC<IProductProps>  = ({ product }) => {
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -19,8 +22,8 @@ const Product: FC<IProductProps>  = ({ product }) => {
     currencyId,
     currencyFormat,
     isFreeShipping,
-
   } = product
+
   const formattedPrice = formatPrice(price, currencyId);
   let productInstallment;
 
@@ -28,7 +31,7 @@ const Product: FC<IProductProps>  = ({ product }) => {
     const installmentPrice = price / installments;
     productInstallment = (
       <S.Installment>
-        <span>or {installments} x</span>
+        <span>或 {installments} x</span>
         <b>
           {currencyFormat}
           {formatPrice(installmentPrice, currencyId)}
@@ -39,10 +42,9 @@ const Product: FC<IProductProps>  = ({ product }) => {
 
   const handleAddProduct = () => {
     if (!selectedSize) {
-      alert("请选择尺码");
+      $message.warning("请选择尺寸！");
       return;
     }
-    console.log('selectedSize',selectedSize);
     dispatch(addToCart({ ...product, selectedSize, quantity: 1 }));
     dispatch(openCart());
   };
@@ -57,8 +59,8 @@ const Product: FC<IProductProps>  = ({ product }) => {
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>
       <div style={{ marginBottom: '10px' }}>
-        <label htmlFor="size" style={{ marginRight: '10px' }}> </label>
         <select
+          data-testid='size'
           id="size"
           value={selectedSize || ""}
           onChange={(e) => setSelectedSize(e.target.value)}

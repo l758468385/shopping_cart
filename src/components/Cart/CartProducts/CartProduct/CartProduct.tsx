@@ -12,7 +12,6 @@ const CartProduct = ({ product }: IProps) => {
   const dispatch = useDispatch();
 
   const {
-    sku,
     title,
     price,
     style,

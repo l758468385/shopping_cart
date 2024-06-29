@@ -1,0 +1,49 @@
+.message-wrap {
+  position: fixed;
+  left: 50%;
+  top: 60px;
+  transform: translate(-50%);
+  z-index: 1000;
+}
+.message-wrap .message {
+  height: 34px;
+  min-width: 180px;
+  padding: 5px 10px;
+  font-size: 18px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0 0 8px #ddd;
+  border: 1px solid #eee;
+}
+.message-wrap .message .icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.message-wrap .info {
+  color: #5a98e9;
+}
+.message-wrap .info > .icon {
+  background: #5a98e9;
+}
+.message-wrap .error {
+  color: #ff4d4f;
+}
+.message-wrap .error > .icon {
+  background: #ff4d4f;
+}
+.message-wrap .warning {
+  color: #faad14;
+}
+.message-wrap .warning > .icon {
+  background: #faad14;
+}
+.message-wrap .success {
+  color: #52c41a;
+}
+.message-wrap .success > .icon {
+  background: #52c41a;
+}

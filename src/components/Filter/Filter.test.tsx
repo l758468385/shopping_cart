@@ -1,21 +1,14 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
+import {theme} from 'commons/style/theme';
 import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import Filter, { availableSizes } from './Filter'; // Ensure to import availableSizes
 import { setSizesFilter } from 'store/slices/productsSlice';
 
-// Mock Redux store
 const mockStore = configureStore([]);
 
-// Mock Theme Provider
-const theme = {
-  colors: {
-    primary: '#007bff', // Example primary color
-    secondary: '#6c757d', // Example secondary color
-  },
-};
 
 describe('Filter component', () => {
   let store: MockStoreEnhanced<unknown, {}>;

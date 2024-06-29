@@ -17,21 +17,22 @@ describe('Sort component', () => {
         products: {
           items: [],
           filterSizes: [],
-          sortDirection: null, // mock initial state as needed
-          status: 'idle', // mock product status as needed
-        },
-      } as RootState)
+          sortDirection: null,  // 根据需要模拟初始状态
+          status: 'idle' // 根据需要模拟产品状态
+        }
+      } as unknown as RootState)
     );
   });
 
-  it('renders with initial state', () => {
+  it('以初始状态呈现', () => {
     const { getByText } = render(<Sort />);
     expect(getByText('按价格升序')).toBeInTheDocument();
     expect(getByText('按价格降序')).toBeInTheDocument();
     expect(useDispatch).toBeCalledTimes(1); // ensure useDispatch is called
   });
 
-  it('handles sorting correctly', () => {
+  //
+  it('正确处理排序', () => {
     const mockDispatch = jest.fn();
     (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
 

@@ -1,5 +1,4 @@
 import { StrictMode } from 'react';
-// @ts-ignore
 import  ReactDOMClient from 'react-dom/client';
 
 /* Theme */

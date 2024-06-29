@@ -7,6 +7,7 @@ import { RootState } from 'store';
 import { ICartProduct } from 'models';
 
 import {openCart,clearCart,closeCart} from 'store/slices/cartSlice';
+import $message from '../../commons/Message/Message';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (total.productQuantity) {
-      alert(
+      $message.success(
         `总计: ${total.currencyFormat} ${formatPrice(
           total.totalPrice,
           total.currencyId
@@ -57,7 +58,7 @@ const Cart = () => {
       dispatch(closeCart())
       dispatch(clearCart())
     } else {
-      alert('在购物车中添加一些产品!');
+      $message.warning  ('请在购物车中添加一些产品!');
     }
   };
 
