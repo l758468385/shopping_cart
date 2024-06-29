@@ -48,15 +48,16 @@ const Cart = () => {
 
 
   const handleCheckout = () => {
+
     if (total.productQuantity) {
+      dispatch(closeCart())
+      dispatch(clearCart())
       $message.success(
         `总计: ${total.currencyFormat} ${formatPrice(
           total.totalPrice,
           total.currencyId
         )}`
       );
-      dispatch(closeCart())
-      dispatch(clearCart())
     } else {
       $message.warning  ('请在购物车中添加一些产品!');
     }
@@ -114,7 +115,7 @@ const Cart = () => {
                 ) : null}
               </S.SubPriceInstallment>
             </S.SubPrice>
-            <S.CheckoutButton onClick={handleCheckout} autoFocus>
+            <S.CheckoutButton data-testid="checkout-button" onClick={handleCheckout } autoFocus>
               去付款
             </S.CheckoutButton>
           </S.CartFooter>
