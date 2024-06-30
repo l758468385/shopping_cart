@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 import { MessageContainer } from './Message';
 import $message from "./Message"
 jest.useFakeTimers();

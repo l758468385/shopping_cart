@@ -8,7 +8,7 @@ import { ICartProduct } from 'models';
 import '@testing-library/jest-dom/extend-expect';
 import { theme } from '../../commons/style/theme';
 import { ThemeProvider } from 'styled-components';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 import $message from 'commons/Message/Message';
 
 const mockStore = configureStore([]);

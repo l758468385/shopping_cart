@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --silent",
+    "test": "jest",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage --watchAll",
     "deploy": "firebase deploy",
@@ -24,11 +24,11 @@
     "@reduxjs/toolkit": "^1.8.6",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^13.0.0",
+    "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.25",
-    "@types/react": "^17.0.43",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^17.0.14",
     "axios": "^0.26.0",
     "babel-jest": "^27.4.2",
@@ -60,7 +60,7 @@
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.0.1",
     "prompts": "^2.4.2",
-    "react": "^18.0.0",
+    "react": "^18.3.1",
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.0.0",
@@ -150,8 +150,7 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm test && npx cypress run"
     }
   },
   "lint-staged": {
