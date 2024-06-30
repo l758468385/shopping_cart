@@ -29,8 +29,8 @@ const Sort = () => {
     <S.Container>
       <S.Title>价格:</S.Title>
       <S.Wrap>
-        <S.SortButton  active={sortOrder === 'ascending'} onClick={() => handleSort(('ascending'))}>按价格升序</S.SortButton>
-        <S.SortButton  active={sortOrder === 'descending'} onClick={() => handleSort(('descending'))}>按价格降序</S.SortButton>
+        <S.SortButton data-testid='price-asc' active={sortOrder === 'ascending'} onClick={() => handleSort(('ascending'))}>按价格升序</S.SortButton>
+        <S.SortButton data-testid='price-desc' active={sortOrder === 'descending'} onClick={() => handleSort(('descending'))}>按价格降序</S.SortButton>
       </S.Wrap>
     </S.Container>
   );

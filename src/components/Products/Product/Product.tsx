@@ -53,7 +53,7 @@ const Product: FC<IProductProps>  = ({ product }) => {
   };
 
   return (
-    <S.Container onKeyUp={handleAddProductWhenEnter} coverImage={coverImage}   tabIndex={1}>
+    <S.Container  data-testid='product-item' onKeyUp={handleAddProductWhenEnter} coverImage={coverImage}   tabIndex={1}>
       {isFreeShipping && <S.Stopper>包邮</S.Stopper>}
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>
@@ -80,14 +80,14 @@ const Product: FC<IProductProps>  = ({ product }) => {
       </div>
 
       <S.Price>
-        <S.Val>
+        <S.Val data-testid='product-price'>
           <small>{currencyFormat}</small>
           <b>{formattedPrice.substring(0, formattedPrice.length - 3)}</b>
           <span>{formattedPrice.substring(formattedPrice.length - 3)}</span>
         </S.Val>
         {productInstallment}
       </S.Price>
-      <S.BuyButton onClick={handleAddProduct} tabIndex={-1}>
+      <S.BuyButton  data-testid='add-to-cart' onClick={handleAddProduct} tabIndex={-1}>
        添加购物车
       </S.BuyButton>
     </S.Container>

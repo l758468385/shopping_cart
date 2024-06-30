@@ -27,8 +27,9 @@ const CartProduct = ({ product }: IProps) => {
   const handleDecreaseProductQuantity = () => dispatch(decrementQuantity(product));
 
   return (
-    <S.Container>
+    <S.Container data-testid='cart-item'>
       <S.DeleteButton
+        data-testid='remove-from-cart'
         onClick={handleRemoveProduct}
         title="从购物车中删除产品"
       />
@@ -38,7 +39,7 @@ const CartProduct = ({ product }: IProps) => {
       />
       <S.Details>
         <S.Title>{title}</S.Title>
-        <S.Desc>
+        <S.Desc data-testid='shop-desc'>
           {`${selectedSize} | ${style}`} <br />
           数量：{quantity}
         </S.Desc>
@@ -52,7 +53,7 @@ const CartProduct = ({ product }: IProps) => {
           >
             -
           </S.ChangeQuantity>
-          <S.ChangeQuantity onClick={handleIncreaseProductQuantity}>
+          <S.ChangeQuantity data-testid='increment-quantity' onClick={handleIncreaseProductQuantity}>
             +
           </S.ChangeQuantity>
         </div>

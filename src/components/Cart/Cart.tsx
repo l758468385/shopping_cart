@@ -98,7 +98,7 @@ const Cart = () => {
           <S.CartFooter>
             <S.Sub>总计</S.Sub>
             <S.SubPrice>
-              <S.SubPriceValue>{`${total.currencyFormat} ${formatPrice(
+              <S.SubPriceValue data-testid='cart-total-price'>{`${total.currencyFormat} ${formatPrice(
                 total.totalPrice,
                 total.currencyId
               )}`}</S.SubPriceValue>
