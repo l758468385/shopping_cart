@@ -5,6 +5,19 @@
   "engines": {
     "node": "14.17.3"
   },
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js --silent",
+    "test:watch": "npm test -- --watch",
+    "test:coverage": "npm test -- --coverage --watchAll",
+    "deploy": "firebase deploy",
+    "lint": "eslint ./src",
+    "format": "prettier --write \"**/*.+(ts|tsx|js|json|css)\"",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "cypress:run": "cypress run",
+    "prepare": "husky install"
+  },
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
@@ -69,17 +82,6 @@
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1"
-  },
-  "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --silent",
-    "test:watch": "npm test -- --watch",
-    "test:coverage": "npm test -- --coverage --watchAll",
-    "deploy": "firebase deploy",
-    "lint": "eslint ./src",
-    "format": "prettier --write \"**/*.+(ts|tsx|js|json|css)\"",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "jest": {
     "roots": [
@@ -182,8 +184,9 @@
     "@types/redux-mock-store": "^1.0.6",
     "@types/styled-components": "^5.1.23",
     "babel-plugin-styled-components": "^2.1.4",
+    "cypress": "^13.12.0",
     "firebase-tools": "^10.2.1",
-    "husky": "^4.2.5",
+    "husky": "^4.3.8",
     "lint-staged": "^10.2.10",
     "prettier": "^2.5.1",
     "redux-mock-store": "^1.5.4",
