@@ -1,4 +1,4 @@
-import { useState, KeyboardEvent, FC } from 'react';
+import { useState, KeyboardEvent, FC, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart, openCart } from 'store/slices/cartSlice';
 import formatPrice from 'utils/formatPrice';
@@ -23,7 +23,6 @@ const Product: FC<IProductProps>  = ({ product }) => {
     isFreeShipping,
     coverImage
   } = product
-  console.log('coverImage',coverImage)
   const formattedPrice = formatPrice(price, currencyId);
   let productInstallment;
 
@@ -95,4 +94,4 @@ const Product: FC<IProductProps>  = ({ product }) => {
   );
 };
 
-export default Product;
+export default memo(Product);

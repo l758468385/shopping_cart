@@ -30,13 +30,17 @@ export const Container = styled.div<IContainer>`
   box-sizing: border-box;
   padding: 10px;
   margin-bottom: 30px;
-  cursor: default;
   outline: none;
-
+  transition: all .2s linear;
+  cursor: pointer;
   &:focus-visible {
     outline: 3px solid ${({ theme }) => theme.colors.secondary};
   }
-
+  :hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+    transform: translate3d(0, -2px, 0);
+    z-index: 2;
+  }
   ${Image} {
     width: 100%;
     height: 270px;
