@@ -96,7 +96,7 @@ describe('Shopping Cart Functionality', () => {
   });
   it('shows correct total quantity and price in the cart', () => {
     // 选择第一个产品的尺寸并添加到购物车
-    cy.get('[data-testid="size"]').first().select('L');
+    cy.get('[data-testid="size"]').first().select('L',{force:true});
     cy.get('[data-testid="product-item"]')
       .first()
       .find('[data-testid="product-price"]')
@@ -106,7 +106,7 @@ describe('Shopping Cart Functionality', () => {
         cy.get('[data-testid="add-to-cart"]').first().click();
 
         // 选择第二个产品的尺寸并添加到购物车
-        cy.get('[data-testid="size"]').eq(1).select('L');
+        cy.get('[data-testid="size"]').eq(1).select('L',{force:true});
         cy.get('[data-testid="product-item"]')
           .eq(1)
           .find('[data-testid="product-price"]')

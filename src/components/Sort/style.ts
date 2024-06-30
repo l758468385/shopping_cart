@@ -83,6 +83,7 @@ export const Title = styled.h4`
 export const Wrap = styled.div`
   display: flex;
   color: red;
+  flex-wrap: wrap;
 `;
 
 export const SortButton = styled.div<{ active: boolean }>`
@@ -95,6 +96,7 @@ export const SortButton = styled.div<{ active: boolean }>`
   background-color: ${props => (props.active ? '#1b1a20' : '#fff')};
   outline: none;
   font-size: 14px;
+  margin-bottom: 14px;
   &:hover {
     background-color: #1b1a20;
     color: #fff;

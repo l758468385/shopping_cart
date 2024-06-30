@@ -16,6 +16,7 @@
   border-radius: 4px;
   box-shadow: 0 0 8px #ddd;
   border: 1px solid #eee;
+  background-color: rgba(255, 255, 255, 0.93);
 }
 .message-wrap .message .icon {
   width: 10px;
