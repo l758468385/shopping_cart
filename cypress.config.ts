@@ -1,12 +1,9 @@
-export default {
-  components: {
-    components: "src",
-    testFiles: "**/*.spec.{js,jsx,ts,tsx}",
-  },
+import { defineConfig } from "cypress";
 
+export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
   },
-};
+});
