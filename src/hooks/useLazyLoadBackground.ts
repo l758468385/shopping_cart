@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const useLazyLoadBackground = (src: string) => {
+const useLazyLoadBackground = () => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 

@@ -7,7 +7,7 @@ import GlobalStyle from 'commons/style/global-style';
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from './store';
+import store, { persistor } from 'store';
 import App from 'components/App';
 
 const root = document.getElementById('root')!;

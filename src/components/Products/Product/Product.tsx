@@ -16,7 +16,7 @@ const Product: FC<IProductProps>  = ({ product }) => {
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
-  const { ref, isIntersecting } = useLazyLoadBackground(product.coverImage);
+  const { ref, isIntersecting } = useLazyLoadBackground();
 
   const {
     title,

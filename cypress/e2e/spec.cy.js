@@ -96,7 +96,7 @@ describe('Shopping Cart Functionality', () => {
   });
   it('shows correct total quantity and price in the cart', () => {
     // 选择第一个产品的尺寸并添加到购物车
-    cy.get('[data-testid="size"]').first().select('L',{force:true});
+    cy.get('[data-testid="size"]').first().select('L', { force: true });
     cy.get('[data-testid="product-item"]')
       .first()
       .find('[data-testid="product-price"]')
@@ -106,7 +106,7 @@ describe('Shopping Cart Functionality', () => {
         cy.get('[data-testid="add-to-cart"]').first().click();
 
         // 选择第二个产品的尺寸并添加到购物车
-        cy.get('[data-testid="size"]').eq(1).select('L',{force:true});
+        cy.get('[data-testid="size"]').eq(1).select('L', { force: true });
         cy.get('[data-testid="product-item"]')
           .eq(1)
           .find('[data-testid="product-price"]')
@@ -143,5 +143,22 @@ describe('Shopping Cart Functionality', () => {
     cy.get('.message').then(($el) => {
       expect($el.text()).to.include('总计');
     });
+  });
+
+  it('persists cart data after page refresh', () => {
+    // 选尺寸
+    cy.get("[data-testid='size']").first().select('L');
+
+    // 添加产品到购物车
+    cy.get("[data-testid='add-to-cart']").first().click();
+
+    // 检查购物车中是否有产品
+    cy.get("[data-testid='cart-item']").should('have.length.at.least', 1);
+
+    // 刷新页面
+    cy.reload();
+
+    // 再次检查购物车中是否有产品
+    cy.get("[data-testid='cart-item']").should('have.length.at.least', 1);
   });
 });
