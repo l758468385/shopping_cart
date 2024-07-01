@@ -12,29 +12,12 @@ import { fetchProducts } from 'store/slices/productsSlice';
 import * as S from './style';
 import { RootState } from '../../store';
 import Sort from '../Sort';
+import { selectFilteredProducts } from '../../selectors/productsSelectors';
 
 function App() {
 
   const dispatch = useDispatch();
-  const products = useSelector((state: RootState) => {
-    const { items, filterSizes, sortDirection } = state.products;
-    let filteredProducts = [...items];
-    if (filterSizes.length > 0) {
-      filteredProducts = filteredProducts.filter((product) =>
-        product.availableSizes.some((size) => filterSizes.includes(size))
-      );
-    }
-
-    if (sortDirection === 'ascending') {
-      filteredProducts.sort((a, b) => {
-       return  a.price - b.price
-      });
-    } else if (sortDirection === 'descending') {
-      filteredProducts.sort((a, b) => b.price - a.price);
-    }
-
-    return filteredProducts;
-  });
+  const products = useSelector(selectFilteredProducts);
   const productStatus = useSelector((state: RootState) => state.products.status);
   useEffect(() => {
     dispatch(fetchProducts());
