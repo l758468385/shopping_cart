@@ -5,6 +5,7 @@ import formatPrice from 'utils/formatPrice';
 import * as S from './style';
 import { IProduct } from 'models';
 import $message from '../../../commons/Message/Message';
+import useLazyLoadBackground from '../../../hooks/useLazyLoadBackground';
 
 interface IProductProps {
   product: IProduct;
@@ -12,7 +13,10 @@ interface IProductProps {
 
 const Product: FC<IProductProps>  = ({ product }) => {
   const dispatch = useDispatch();
+
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
+  const { ref, isIntersecting } = useLazyLoadBackground(product.coverImage);
 
   const {
     title,
@@ -24,8 +28,8 @@ const Product: FC<IProductProps>  = ({ product }) => {
     coverImage
   } = product
   const formattedPrice = formatPrice(price, currencyId);
-  let productInstallment;
 
+  let productInstallment;
   if (installments) {
     const installmentPrice = price / installments;
     productInstallment = (
@@ -53,7 +57,7 @@ const Product: FC<IProductProps>  = ({ product }) => {
   };
 
   return (
-    <S.Container  data-testid='product-item' onKeyUp={handleAddProductWhenEnter} coverImage={coverImage}   tabIndex={1}>
+    <S.Container  ref={ref}   coverImage={isIntersecting ? coverImage : ''} data-testid='product-item' onKeyUp={handleAddProductWhenEnter}    tabIndex={1}>
       {isFreeShipping && <S.Stopper>包邮</S.Stopper>}
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>
