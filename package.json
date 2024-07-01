@@ -149,7 +149,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx cypress run"
+      "pre-commit": "npm test && npx cypress run"
     }
   },
   "lint-staged": {
