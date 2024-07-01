@@ -34,4 +34,3 @@ const useLazyLoadBackground = () => {
 };
 
 export default useLazyLoadBackground;
-//
